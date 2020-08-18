@@ -38,7 +38,7 @@ class ComplexCommand < Command
     @b = b
   end
 
-# Command delegate to receiver method
+# Delegate command to receiver method
   def execute
     print 'ComplexCommand: Complex stuff done by receiver object'
     @receiver.do_something(@a)
@@ -46,7 +46,7 @@ class ComplexCommand < Command
   end
 end
 
-# Receiver class to perform/carry out collection of request operations
+# Receiver class performs/carry's out collection of request operations
 class Receiver
   # @param [String] a
   def do_something(a)
@@ -59,7 +59,7 @@ class Receiver
   end
 end
 
-# Invoker send request commands 
+# Invoker sends request commands 
 class Invoker
   # Initialize commands.
 
@@ -85,6 +85,11 @@ class Invoker
   end
 end
 
+# Command interface declares & execute command
+# Delegate receiver commands to other objects
+# Receiver class performs/carry's out collection of request operations
+# Invoker sends request commands 
+
 # client parameterizing invoker with commands
 invoker = Invoker.new
 invoker.on_start = SimpleCommand.new('Say Hi!')
@@ -92,6 +97,7 @@ receiver = Receiver.new
 invoker.on_finish = ComplexCommand.new(receiver, 'Send email', 'Save report')
 
 invoker.do_something_important
+
 
 
 # Invoker: Does anybody want something done before I begin?
@@ -104,3 +110,6 @@ invoker.do_something_important
 # 
 # Receiver: Working on (Send email.)
 # Receiver: Also working on (Save report.)%
+
+##################
+
