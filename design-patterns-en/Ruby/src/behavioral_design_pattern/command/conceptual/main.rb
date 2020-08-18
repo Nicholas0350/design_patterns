@@ -1,11 +1,11 @@
 # Command Design Pattern
 #
-# Intent: Turns a request into a stand-alone object that contains all
-# information about the request. This transformation lets you parameterize
-# methods with different requests, delay or queue a request's execution, and
+# Intent: Turns request into stand-alone object that contains all
+# information about request. 
+# Parameterize methods with different requests, delay or queue request's execution &
 # support undoable operations.
 
-# Command interface declare method for executing a command.
+# Command interface declare & execute command
 class Command
   # @abstract
   def execute
@@ -27,24 +27,22 @@ end
 
 # Delegate receiver commands to other objects
 class ComplexCommand < Command
-  # Complex commands can accept one or several receiver objects along with any
-  # context data via the constructor.
+  # Complex command constructor accept one/several receiver objects/context data
   def initialize(receiver, a, b)
     @receiver = receiver
     @a = a
     @b = b
   end
 
-  # Command delegate to receiver method
+# Command delegate to receiver method
   def execute
-    print 'ComplexCommand: Complex stuff should be done by a receiver object'
-    @receiver.do_something(@a)``
+    print 'ComplexCommand: Complex stuff done by receiver object'
+    @receiver.do_something(@a)
     @receiver.do_something_else(@b)
   end
 end
 
-# Receiver class to perform/carry out following request operations
-#
+# Receiver class to perform/carry out collection of request operations
 class Receiver
   # @param [String] a
   def do_something(a)
@@ -57,7 +55,7 @@ class Receiver
   end
 end
 
-# Invoker send request associated commands 
+# Invoker send request commands 
 class Invoker
   # Initialize commands.
 
@@ -70,9 +68,8 @@ class Invoker
   def on_finish=(command)
     @on_finish = command
   end
-
-  # The Invoker does not depend on concrete command or receiver classes. The
-  # Invoker passes a request to a receiver indirectly, by executing a command.
+  
+  # Invoker request command to a receiver passer
   def do_something_important
     puts 'Invoker: Does anybody want something done before I begin?'
     @on_start.execute if @on_start.is_a? Command
@@ -84,10 +81,22 @@ class Invoker
   end
 end
 
-# The client code can parameterize an invoker with any commands.
+# client parameterizing invoker with any commands.
 invoker = Invoker.new
 invoker.on_start = SimpleCommand.new('Say Hi!')
 receiver = Receiver.new
 invoker.on_finish = ComplexCommand.new(receiver, 'Send email', 'Save report')
 
 invoker.do_something_important
+
+
+Invoker: Does anybody want something done before I begin?
+SimpleCommand: See, I can do simple things like printing (Say Hi!)
+
+Invoker: ...doing something really important...
+Invoker: Does anybody want something done after I finish?
+
+ComplexCommand: Complex stuff done by receiver object
+
+Receiver: Working on (Send email.)
+Receiver: Also working on (Save report.)%
