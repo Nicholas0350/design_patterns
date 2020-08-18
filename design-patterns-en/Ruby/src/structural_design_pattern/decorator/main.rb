@@ -80,9 +80,3 @@ decorator1 = ConcreteDecoratorA.new(simple)
 decorator2 = ConcreteDecoratorB.new(decorator1)
 puts 'Client: Now I\'ve got a decorated component:'
 client_code(decorator2)
-
-# Client: I've got a simple component:
-# RESULT: ConcreteComponent
-# 
-# Client: Now I've got a decorated component:
-# RESULT: ConcreteDecoratorB(ConcreteDecoratorA(ConcreteComponent))%
