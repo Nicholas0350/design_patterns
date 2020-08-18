@@ -5,7 +5,7 @@
 # methods with different requests, delay or queue a request's execution, and
 # support undoable operations.
 
-# The Command interface declares a method for executing a command.
+# Command interface declare method for executing a command.
 class Command
   # @abstract
   def execute
@@ -13,7 +13,7 @@ class Command
   end
 end
 
-# Some commands can implement simple operations on their own.
+# Simple operations command
 class SimpleCommand < Command
   # @param [String] payload
   def initialize(payload)
@@ -25,8 +25,7 @@ class SimpleCommand < Command
   end
 end
 
-# However, some commands can delegate more complex operations to other objects,
-# called "receivers".
+# Delegate receiver commands to other objects
 class ComplexCommand < Command
   # Complex commands can accept one or several receiver objects along with any
   # context data via the constructor.
@@ -36,17 +35,16 @@ class ComplexCommand < Command
     @b = b
   end
 
-  # Commands can delegate to any methods of a receiver.
+  # Command delegate to receiver method
   def execute
     print 'ComplexCommand: Complex stuff should be done by a receiver object'
-    @receiver.do_something(@a)
+    @receiver.do_something(@a)``
     @receiver.do_something_else(@b)
   end
 end
 
-# The Receiver classes contain some important business logic. They know how to
-# perform all kinds of operations, associated with carrying out a request. In
-# fact, any class may serve as a Receiver.
+# Receiver class to perform/carry out following request operations
+#
 class Receiver
   # @param [String] a
   def do_something(a)
@@ -59,8 +57,7 @@ class Receiver
   end
 end
 
-# The Invoker is associated with one or several commands. It sends a request to
-# the command.
+# Invoker send request associated commands 
 class Invoker
   # Initialize commands.
 
