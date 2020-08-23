@@ -1,4 +1,4 @@
- 
+ require 'ruby'
 # In Ruby, (almost) everything is an object.
 # This includes numbers...
 3.class #=> Integer
@@ -8,6 +8,7 @@
 
 # ...and even methods!
 'Hello'.method(:class).class #=> Method
+
 
 # Some basic arithmetic
 1 + 1 #=> 2
@@ -68,12 +69,11 @@ false.class #=> FalseClass
 true && false #=> false
 true || false #=> true
 
-# There are alternate versions of the logical operators with much lower
-# precedence. These are meant to be used as flow-control constructs to chain
-# statements together until one of them returns true or false.
+# lower precedence logical flow control to chain statements until true or false returned. 
 
 # `do_something_else` only called if `do_something` succeeds.
 do_something and do_something_else
+
 # `log_error` only called if `do_something` fails.
 do_something or log_error
 
@@ -83,7 +83,7 @@ placeholder = 'use string interpolation'
 "I can #{placeholder} when using double quoted strings"
 #=> "I can use string interpolation when using double quoted strings"
 
-# You can combine strings using `+`, but not with other types
+# Combine strings using `+`, but not with other types
 'hello ' + 'world' #=> "hello world"
 'hello ' + 3 #=> TypeError: can't convert Fixnum into String
 'hello ' + 3.to_s #=> "hello 3"
@@ -104,7 +104,9 @@ puts "I'm printing!"
 print "I'm printing!"
 #=> "I'm printing!" => nil
 
-# Variables
+# //////////////////////  
+# 2. Variables
+
 x = 25 #=> 25
 x #=> 25
 
